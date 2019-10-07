@@ -14,6 +14,8 @@ public class PlayerManager : IManagable
     {
         GameObject newPlayer = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
         player = newPlayer.GetComponent<Player>();
+        player.transform.position = GameLinks.gl.playerSpawn.position;
+        player.FirstInitialize();
     }
 
     public void PhysicsRefresh()
@@ -28,6 +30,6 @@ public class PlayerManager : IManagable
 
     public void SecondInitialize()
     {
-        
+        player.SecondInitialize();
     }
 }
