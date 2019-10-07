@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : IManager
+public class EnemyManager : IManagable
 {
     #region Singleton
     private static EnemyManager instance;
@@ -12,22 +12,18 @@ public class EnemyManager : IManager
 
     public void FirstInitialize()
     {
-        Debug.Log("enemy manger init called");
     }
 
     public void PhysicsRefresh()
     {
-        Debug.Log(" EnemyM physics refresh");
     }
 
     public void Refresh()
     {
-        Debug.Log("EnemyM refresh");
     }
 
     public void SecondInitialize()
     {
-        Debug.Log("EnemyM SecondInitialize");
         
     }
 }

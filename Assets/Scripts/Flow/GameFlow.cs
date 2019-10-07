@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameFlow : IManager
+public class GameFlow : IManagable
 {
     #region Singleton
     private static GameFlow instance = null;
@@ -24,8 +24,11 @@ public class GameFlow : IManager
     }
 
     #endregion
+
+    
     public void FirstInitialize()
     {
+        GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
         InputManager.Instance.FirstInitialize();
         PlayerManager.Instance.FirstInitialize();
         EnemyManager.Instance.FirstInitialize();

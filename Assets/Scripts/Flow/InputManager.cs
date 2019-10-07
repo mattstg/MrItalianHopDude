@@ -2,32 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : IManager
+public class InputManager : IManagable
 {
     #region Singleton
     private static InputManager instance;
     private InputManager() { }
     public static InputManager Instance { get { return instance ?? (instance = new InputManager()); } }
     #endregion
+    public InputPkg refreshInputPkg = new InputPkg();
+    public InputPkg physicsRefreshInputPkg = new InputPkg();
 
     public void FirstInitialize()
     {
-        Debug.Log("InputManager init called");
     }
 
     public void PhysicsRefresh()
     {
-        Debug.Log(" InputManager physics refresh");
+        SetInputPkg(physicsRefreshInputPkg);
+    }
+
+    private void SetInputPkg(InputPkg ip)
+    {
+        ip.jumpPressed = Input.GetButtonDown("Jump");
+        ip.jumpHeld = Input.GetButton("Jump");
+        ip.dirPressed = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
     public void Refresh()
     {
-        Debug.Log("InputManager refresh");
+        SetInputPkg(refreshInputPkg);
     }
 
     public void SecondInitialize()
     {
-        Debug.Log("InputManager SecondInitialize");
         
+    }
+
+    public class InputPkg
+    {
+        public Vector2 dirPressed;
+        public bool jumpPressed;
+        public bool jumpHeld;
+
+        public override string ToString()
+        {
+            return $"DirPressed: {dirPressed}, jumpFirstPressed: {jumpPressed}, jumpHeld {jumpHeld}";
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IManager
+public interface IManagable
 {
     void FirstInitialize();
     void SecondInitialize();

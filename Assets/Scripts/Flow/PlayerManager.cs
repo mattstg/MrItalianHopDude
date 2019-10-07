@@ -2,32 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : IManager
+public class PlayerManager : IManagable
 {
     #region Singleton
     private static PlayerManager instance;
     private PlayerManager() { }
     public static PlayerManager Instance { get { return instance ?? (instance = new PlayerManager()); } }
     #endregion
-
+    Player player;
     public void FirstInitialize()
     {
-        Debug.Log("PlayerManager init called");
+        GameObject newPlayer = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
+        player = newPlayer.GetComponent<Player>();
     }
 
     public void PhysicsRefresh()
     {
-        Debug.Log(" PlayerManager physics refresh");
+        player.PhysicsRefresh(InputManager.Instance.physicsRefreshInputPkg);
     }
 
     public void Refresh()
     {
-        Debug.Log("PlayerManager refresh");
+        player.Refresh(InputManager.Instance.refreshInputPkg);
     }
 
     public void SecondInitialize()
     {
-        Debug.Log("PlayerManager SecondInitialize");
         
     }
 }

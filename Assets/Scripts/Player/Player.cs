@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void FirstInitialize()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PhysicsRefresh(InputManager.InputPkg playerInput)
     {
-        
+        Debug.Log(playerInput);
+    }
+
+    public void Refresh(InputManager.InputPkg playerInput)
+    {
+    }
+
+    public void SecondInitialize()
+    {
     }
 }
