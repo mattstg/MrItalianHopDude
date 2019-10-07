@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : IManager
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Singleton
+    private static PlayerManager instance;
+    private PlayerManager() { }
+    public static PlayerManager Instance { get { return instance ?? (instance = new PlayerManager()); } }
+    #endregion
+
+    public void FirstInitialize()
     {
-        
+        Debug.Log("PlayerManager init called");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PhysicsRefresh()
     {
+        Debug.Log(" PlayerManager physics refresh");
+    }
+
+    public void Refresh()
+    {
+        Debug.Log("PlayerManager refresh");
+    }
+
+    public void SecondInitialize()
+    {
+        Debug.Log("PlayerManager SecondInitialize");
         
     }
 }

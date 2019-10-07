@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class MainEntry : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public void Awake()
+    {
+        GameFlow.Instance.FirstInitialize();
+    }
     void Start()
     {
-        GameFlow.Instance.SampleFunc();
-        GameFlow.Instance.SampleFunc();
+        GameFlow.Instance.SecondInitialize();
     }
 
+    
     // Update is called once per frame
     void Update()
     {
-        
+        GameFlow.Instance.Refresh();
+    }
+
+    private void FixedUpdate()
+    {
+        GameFlow.Instance.PhysicsRefresh();
     }
 }

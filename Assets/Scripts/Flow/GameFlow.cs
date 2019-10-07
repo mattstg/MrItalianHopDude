@@ -2,28 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameFlow
+public class GameFlow : IManager
 {
     #region Singleton
     private static GameFlow instance = null;
 
-        private GameFlow()
-        {
-        }
+    private GameFlow()
+    {
+    }
 
-        public static GameFlow Instance
+    public static GameFlow Instance
+    {
+        get
         {
-            get
+            if (instance == null)
             {
-                if (instance == null)
-                {
-                    instance = new GameFlow();
-                }
-                return instance;
+                instance = new GameFlow();
             }
+            return instance;
         }
-    #endregion
+    }
 
-    public void SampleFunc() { }
-    
+    #endregion
+    public void FirstInitialize()
+    {
+        InputManager.Instance.FirstInitialize();
+        PlayerManager.Instance.FirstInitialize();
+        EnemyManager.Instance.FirstInitialize();
+    }
+
+    public void PhysicsRefresh()
+    {
+        InputManager .Instance.PhysicsRefresh();
+        PlayerManager.Instance.PhysicsRefresh();
+        EnemyManager .Instance.PhysicsRefresh();
+    }
+
+    public void Refresh()
+    {
+        InputManager.Instance .Refresh();
+        PlayerManager.Instance.Refresh();
+        EnemyManager.Instance .Refresh();
+    }
+
+    public void SecondInitialize()
+    {
+        InputManager .Instance.SecondInitialize();
+        PlayerManager.Instance.SecondInitialize();
+        EnemyManager .Instance.SecondInitialize();
+    }
 }
