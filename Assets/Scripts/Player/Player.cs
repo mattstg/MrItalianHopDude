@@ -5,6 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    float hp;
+    float maxHp = 100;
+    int numOfLives;
+    PlayerUIPkg uipkg;
+
     Rigidbody2D rb;
     public float moveSpeed = 5;
     public float maxSpeed = 7;
@@ -19,6 +24,7 @@ public class Player : MonoBehaviour
 
     public void FirstInitialize()
     {
+        hp = maxHp;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -29,7 +35,8 @@ public class Player : MonoBehaviour
         rb.velocity = velo;
 
         Jump(playerInput.jumpPressed, playerInput.jumpHeld);
-
+        if (playerInput.jumpHeld)
+            hp -= Time.fixedDeltaTime * 5;
     }
     
     private bool CheckIsGroundedRaycast()
@@ -72,5 +79,22 @@ public class Player : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         groundObjectsTouching.Remove(collision.collider);
+    }
+
+    public PlayerUIPkg GetUIPkg()
+    {
+        return new PlayerUIPkg() { numOfLives = this.numOfLives, lifePercentage = (hp / maxHp) };
+    }
+
+    public class PlayerUIPkg
+    {
+        public PlayerUIPkg() { }
+        public PlayerUIPkg(int _numOfLives, float _lifePerc)
+        {
+            numOfLives = _numOfLives;
+            lifePercentage = _lifePerc;
+        }
+        public int numOfLives;
+        public float lifePercentage;
     }
 }

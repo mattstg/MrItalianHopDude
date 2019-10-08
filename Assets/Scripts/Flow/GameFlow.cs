@@ -29,9 +29,11 @@ public class GameFlow : IManagable
     public void FirstInitialize()
     {
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
+        UILinks.instance = GameObject.FindObjectOfType<UILinks>();
         InputManager.Instance.FirstInitialize();
         PlayerManager.Instance.FirstInitialize();
         EnemyManager.Instance.FirstInitialize();
+        UIManager.Instance.FirstInitialize();
     }
 
     public void PhysicsRefresh()
@@ -46,6 +48,7 @@ public class GameFlow : IManagable
         InputManager.Instance .Refresh();
         PlayerManager.Instance.Refresh();
         EnemyManager.Instance .Refresh();
+        UIManager.Instance.Refresh();
     }
 
     public void SecondInitialize()
@@ -53,5 +56,6 @@ public class GameFlow : IManagable
         InputManager .Instance.SecondInitialize();
         PlayerManager.Instance.SecondInitialize();
         EnemyManager .Instance.SecondInitialize();
+        UIManager.Instance.SecondInitialize();
     }
 }

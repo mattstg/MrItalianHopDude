@@ -9,7 +9,7 @@ public class PlayerManager : IManagable
     private PlayerManager() { }
     public static PlayerManager Instance { get { return instance ?? (instance = new PlayerManager()); } }
     #endregion
-    Player player;
+    public Player player;
     public void FirstInitialize()
     {
         GameObject newPlayer = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
