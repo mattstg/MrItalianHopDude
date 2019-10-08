@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartButtonPressed()
     {
-        Debug.Log("start button prssed");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
     public void ButtonWasPressed(Transform t)
@@ -47,4 +47,5 @@ public class MainMenu : MonoBehaviour
 
 
     }
+
 }
