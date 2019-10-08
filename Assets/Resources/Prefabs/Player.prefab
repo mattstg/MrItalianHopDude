@@ -143,4 +143,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   maxSpeed: 7
-  moveType: 1
+  initialJumpForce: 6
+  holdJumpForce: 5

@@ -9,6 +9,13 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5;
     public float maxSpeed = 7;
     public float initialJumpForce = 10;
+    public float holdJumpForce = 6;
+    HashSet<Collider2D> groundObjectsTouching = new HashSet<Collider2D>();
+    private bool isGrounded { get { return groundObjectsTouching.Count > 0; } }
+    float timeLastJumped;
+    float jumpCooldown = .5f;
+    float timeCanHoldJump = 1f;
+    bool firstGroundTouch = false;
 
     public void FirstInitialize()
     {
@@ -32,8 +39,16 @@ public class Player : MonoBehaviour
 
     private void Jump(bool jumpPressed, bool jumpHeld)
     {
-        if(jumpPressed && CheckIsGroundedRaycast())
+        if (jumpPressed && isGrounded && (Time.time - timeLastJumped) > jumpCooldown)
+        {
             rb.AddForce(Vector2.up * initialJumpForce, ForceMode2D.Impulse);
+            timeLastJumped = Time.time;
+        }
+        if(jumpHeld && Time.time - timeLastJumped < timeCanHoldJump )
+        {
+            rb.AddForce(Vector2.up * holdJumpForce);
+        }
+
     }
 
     public void Refresh(InputManager.InputPkg playerInput)
@@ -43,5 +58,19 @@ public class Player : MonoBehaviour
 
     public void SecondInitialize()
     {
+       
+    }
+
+    private void OnCollisionEnter2D(Collision2D coli)
+    {
+        if (!groundObjectsTouching.Contains(coli.collider))
+        {
+            groundObjectsTouching.Add(coli.collider);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        groundObjectsTouching.Remove(collision.collider);
     }
 }
