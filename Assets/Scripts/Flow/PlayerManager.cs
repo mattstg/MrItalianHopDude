@@ -16,6 +16,7 @@ public class PlayerManager : IManagable
         player = newPlayer.GetComponent<Player>();
         player.transform.position = GameLinks.gl.playerSpawn.position;
         player.FirstInitialize();
+        GameObject.FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().Follow = newPlayer.transform;
     }
 
     public void PhysicsRefresh()
